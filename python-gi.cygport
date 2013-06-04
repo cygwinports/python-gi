@@ -15,6 +15,7 @@ PATCH_URI="3.4.2-g_strdup.patch"
 
 DEPEND="girepository(GLib-2.0)
 	pkgconfig(cairo)
+	pkgconfig(libffi)
 	pkgconfig(py3cairo)
 	python(cairo)"
 
@@ -33,12 +34,10 @@ src_compile() {
 	cygautoreconf
 	mkdir -p ${B}/py{2,3}
 	cd ${B}/py2
-	cygconf PYTHON=/usr/bin/python${PYTHON_VERSION} \
-		FFI_CFLAGS=-DHAVE_FFI_H  FFI_LIBS=-lffi
+	cygconf PYTHON=/usr/bin/python${PYTHON_VERSION}
 	cygmake LIBS="-no-undefined ${LIBPYTHON}"
 	cd ${B}/py3
-	cygconf PYTHON=/usr/bin/python${PYTHON3_VERSION}${PYTHON3_ABIFLAGS} \
-		FFI_CFLAGS=-DHAVE_FFI_H  FFI_LIBS=-lffi
+	cygconf PYTHON=/usr/bin/python${PYTHON3_VERSION}${PYTHON3_ABIFLAGS}
 	cygmake LIBS="-no-undefined ${LIBPYTHON3}"
 }
 
