@@ -3,7 +3,7 @@ inherit python python3 gnome.org
 
 NAME="python-gi"
 VERSION=3.14.0
-RELEASE=1
+RELEASE=2
 CATEGORY="Python"
 SUMMARY="Python GObject Introspection bindings"
 DESCRIPTION="This archive contains bindings for the GLib, GObject and GIO,
@@ -20,9 +20,9 @@ DEPEND="girepository(GLib-2.0)
 	python(cairo)"
 
 PKG_NAMES="python-gi python3-gi python-gi-common python-gi-devel"
-python_gi_REQUIRES="python-gi-common python-cairo girepository-GLib2.0"
+python_gi_REQUIRES="python-gi-common girepository-GLib2.0"
 python_gi_CONTENTS=${PYTHON_SITELIB#/}
-python3_gi_REQUIRES="python-gi-common python3-cairo girepository-GLib2.0"
+python3_gi_REQUIRES="python-gi-common girepository-GLib2.0"
 python3_gi_CONTENTS=${PYTHON3_SITELIB#/}
 python_gi_common_CONTENTS="usr/share/doc/"
 python_gi_devel_CONTENTS="usr/include/ usr/lib/pkgconfig/"
