@@ -2,8 +2,8 @@ ORIG_PN="pygobject"
 inherit python python3 gnome.org
 
 NAME="python-gi"
-VERSION=3.14.0
-RELEASE=2
+VERSION=3.18.2
+RELEASE=1
 CATEGORY="Python"
 SUMMARY="Python GObject Introspection bindings"
 DESCRIPTION="This archive contains bindings for the GLib, GObject and GIO,
