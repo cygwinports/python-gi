@@ -1,8 +1,8 @@
 ORIG_PN="pygobject"
-inherit python python3 gnome.org
+inherit python2 python3 gnome.org
 
 NAME="python-gi"
-VERSION=3.18.2
+VERSION=3.22.0
 RELEASE=1
 CATEGORY="Python"
 SUMMARY="Python GObject Introspection bindings"
@@ -19,9 +19,10 @@ DEPEND="girepository(GLib-2.0)
 	pkgconfig(py3cairo)
 	python(cairo)"
 
-PKG_NAMES="python-gi python3-gi python-gi-common python-gi-devel"
-python_gi_REQUIRES="python-gi-common girepository-GLib2.0"
-python_gi_CONTENTS=${PYTHON_SITELIB#/}
+PKG_NAMES="python2-gi python3-gi python-gi-common python-gi-devel"
+python2_gi_REQUIRES="python-gi-common girepository-GLib2.0"
+python2_gi_OBSOLETES=${NAME}
+python2_gi_CONTENTS=${PYTHON2_SITELIB#/}
 python3_gi_REQUIRES="python-gi-common girepository-GLib2.0"
 python3_gi_CONTENTS=${PYTHON3_SITELIB#/}
 python_gi_common_CONTENTS="usr/share/doc/"
@@ -33,8 +34,8 @@ src_compile() {
 	cygautoreconf
 	mkdir -p ${B}/py{2,3}
 	cd ${B}/py2
-	cygconf PYTHON=/usr/bin/python${PYTHON_VERSION}
-	cygmake LIBS="-no-undefined ${LIBPYTHON}"
+	cygconf PYTHON=/usr/bin/python${PYTHON2_VERSION}
+	cygmake LIBS="-no-undefined ${LIBPYTHON2}"
 	cd ${B}/py3
 	cygconf PYTHON=/usr/bin/python${PYTHON3_VERSION}${PYTHON3_ABIFLAGS}
 	cygmake LIBS="-no-undefined ${LIBPYTHON3}"
