@@ -2,7 +2,7 @@ ORIG_PN="pygobject"
 inherit python2 python3 gnome.org
 
 NAME="python-gi"
-VERSION=3.22.0
+VERSION=3.24.1
 RELEASE=1
 CATEGORY="Python"
 SUMMARY="Python GObject Introspection bindings"
@@ -47,5 +47,3 @@ src_install() {
 	cd ${B}/py2
 	cyginstall
 }
-
-KEEP_LA_FILES="none"
