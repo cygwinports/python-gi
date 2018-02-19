@@ -2,7 +2,7 @@ ORIG_PN="pygobject"
 inherit python2 python3 gnome.org
 
 NAME="python-gi"
-VERSION=3.24.1
+VERSION=3.26.1
 RELEASE=1
 CATEGORY="Python"
 SUMMARY="Python GObject Introspection bindings"
@@ -10,8 +10,6 @@ DESCRIPTION="This archive contains bindings for the GLib, GObject and GIO,
 to be used in Python. It is a fairly complete set of bindings,
 it's already rather useful, and is usable to write moderately
 complex programs."
-
-PATCH_URI="3.14.0-std-c90.patch"
 
 DEPEND="girepository(GLib-2.0)
 	pkgconfig(cairo)
