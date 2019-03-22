@@ -1,9 +1,9 @@
 ORIG_PN="pygobject"
-inherit python2 python3 gnome.org
+inherit python-wheel gnome.org
 
 NAME="python-gi"
 VERSION=3.26.1
-RELEASE=1
+RELEASE=2
 CATEGORY="Python"
 SUMMARY="Python GObject Introspection bindings"
 DESCRIPTION="This archive contains bindings for the GLib, GObject and GIO,
@@ -17,31 +17,33 @@ DEPEND="girepository(GLib-2.0)
 	pkgconfig(py3cairo)
 	python(cairo)"
 
-PKG_NAMES="python2-gi python3-gi python-gi-common python-gi-devel"
-python2_gi_REQUIRES="python-gi-common girepository-GLib2.0"
-python2_gi_OBSOLETES=${NAME}
-python2_gi_CONTENTS=${PYTHON2_SITELIB#/}
-python3_gi_REQUIRES="python-gi-common girepository-GLib2.0"
-python3_gi_CONTENTS=${PYTHON3_SITELIB#/}
-python_gi_common_CONTENTS="usr/share/doc/"
-python_gi_devel_CONTENTS="usr/include/ usr/lib/pkgconfig/"
+PKG_NAMES+=" python-gi-common python-gi-devel"
+python27_gi_REQUIRES="girepository-GLib2.0 python27-cairo"
+python36_gi_REQUIRES="girepository-GLib2.0 python36-cairo"
+python37_gi_REQUIRES="girepository-GLib2.0 pytnon37-cairo"
+python_gi_common_CATEGORY="_obsolete"
+python_gi_devel_CONTENTS="
+	usr/include/pygobject-3.0/
+	usr/lib/pkgconfig/pygobject-3.0.pc
+	usr/share/doc/python-gi-devel/
+"
+PKG_IGNORE="usr/share/doc/python-gi-common/"
 
 src_compile() {
 	cd ${S}
-	ACLOCAL_FLAGS="-I m4"
 	cygautoreconf
-	mkdir -p ${B}/py{2,3}
-	cd ${B}/py2
-	cygconf PYTHON=/usr/bin/python${PYTHON2_VERSION}
-	cygmake LIBS="-no-undefined ${LIBPYTHON2}"
-	cd ${B}/py3
-	cygconf PYTHON=/usr/bin/python${PYTHON3_VERSION}${PYTHON3_ABIFLAGS}
-	cygmake LIBS="-no-undefined ${LIBPYTHON3}"
+	cd ${B}
+	lndirs
+	python_wheel_compile
 }
 
 src_install() {
-	cd ${B}/py3
-	cyginstall
-	cd ${B}/py2
-	cyginstall
+	cd ${B}
+	python_wheel_install
+
+	includeinto pygobject-3.0
+	doinclude ${S}/gi/pygobject.h
+
+	dopkgconfig build/temp.cygwin-*-2.7/pygobject-3.0.pc
+	sed -i -e '1c prefix=/usr' ${D}/usr/lib/pkgconfig/pygobject-3.0.pc
 }
