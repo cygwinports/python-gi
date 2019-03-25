@@ -20,7 +20,7 @@ DEPEND="girepository(GLib-2.0)
 PKG_NAMES+=" python-gi-common python-gi-devel"
 python27_gi_REQUIRES="girepository-GLib2.0 python27-cairo"
 python36_gi_REQUIRES="girepository-GLib2.0 python36-cairo"
-python37_gi_REQUIRES="girepository-GLib2.0 pytnon37-cairo"
+python37_gi_REQUIRES="girepository-GLib2.0 python37-cairo"
 python_gi_common_CATEGORY="_obsolete"
 python_gi_devel_CONTENTS="
 	usr/include/pygobject-3.0/
